@@ -1,0 +1,30 @@
+<div id="page_container">
+  <div id="page_content">
+    <div class="content">
+      <h3>District | View District Details</h3>
+
+      <table width="100%" border=0 cellspacing=1 cellpadding=3 class="listTable">
+        <tr>
+          <th width="20%">Name</th>
+          <td><%= @district.name %></td>
+        </tr>
+        <tr>
+          <th width="20%">Reference Name</th>
+          <td><%= @district.short_code %></td>
+        </tr>
+        <tr>
+          <th width="20%">State</th>
+          <td><%= @district.state.name %></td>
+        </tr>
+        <tr>
+          <th width="20%">Division</th>
+          <td><%= @district.division.name %></td>
+        </tr>
+        <tr>
+          <th width="20%">Description</th>
+          <td><%= @district.description %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

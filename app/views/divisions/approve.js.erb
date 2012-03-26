@@ -1,0 +1,3 @@
+$("#status_<%=@division.id%>").html("<%=escape_javascript(link_to @division.status? ? image_tag('tick.gif') : image_tag('cross.gif'),approve_division_path,:remote=>true)%>");
+
+

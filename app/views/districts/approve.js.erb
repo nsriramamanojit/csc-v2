@@ -1,0 +1,3 @@
+$("#status_<%=@district.id%>").html("<%=escape_javascript(link_to @district.status? ? image_tag('tick.gif') : image_tag('cross.gif'),approve_district_path,:remote=>true)%>");
+
+

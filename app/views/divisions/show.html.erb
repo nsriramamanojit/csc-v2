@@ -1,0 +1,26 @@
+<div id="page_container">
+  <div id="page_content">
+    <div class="content">
+      <h3>Division | View Division Details</h3>
+
+      <table width="100%" border=0 cellspacing=1 cellpadding=3 class="listTable">
+        <tr>
+          <th width="20%">Name</th>
+          <td><%= @division.name %></td>
+        </tr>
+        <tr>
+          <th width="20%">Reference Name</th>
+          <td><%= @division.short_code %></td>
+        </tr>
+        <tr>
+          <th width="20%">State</th>
+          <td><%= @division.state.name %></td>
+        </tr>
+        <tr>
+          <th width="20%">Description</th>
+          <td><%= @division.description %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
