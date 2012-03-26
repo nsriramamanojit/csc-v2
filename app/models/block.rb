@@ -1,15 +1,17 @@
-class District < ActiveRecord::Base
+class Block < ActiveRecord::Base
   #relations
   belongs_to :state
   belongs_to :division
-  has_many :blocks,:dependent => :destroy
+  belongs_to :district
   has_many :panchayats , :dependent => :destroy
 
   #validations
   validates :state_id, :presence => true
   validates :division_id, :presence => true
-  validates :name, :presence => true, :uniqueness => true, :length => {:maximum => 100}
-  validates :short_code, :presence => true, :uniqueness => true, :length => {:maximum => 5}
+  validates :district_id, :presence => true
+  validates :name, :presence => true, :length => {:maximum => 100}
+  validates :short_code, :length => {:maximum => 5}
+
   #search and recent
   class << self
     def recent
@@ -19,7 +21,7 @@ class District < ActiveRecord::Base
     def search(query)
       if query
         #where(:name.matches => "%#{query}%") #from meta_where gem
-        joins(:state, :division).where({:name.matches => "%#{query}%"}|{:states => [:name.matches => "%#{query}%"]}|{:divisions => [:name.matches => "%#{query}%"]})
+        joins(:state, :division,:district).where({:name.matches => "%#{query}%"}|{:states => [:name.matches => "%#{query}%"]}|{:divisions => [:name.matches => "%#{query}%"]}| {:districts => [:name.matches => "%#{query}%"]})
       else
         scoped
       end
@@ -27,7 +29,6 @@ class District < ActiveRecord::Base
     def active
       where(:status => true).order('name ASC')
     end
-
-  end
+  end      # end of class self
 
 end

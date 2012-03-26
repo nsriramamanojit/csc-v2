@@ -82,8 +82,8 @@ module ApplicationHelper
     return 'No Records found' if records.blank?
     content = ''
     i = 1
-    for record in records
-      content << "#{i}. " + record.name + "<br/>"
+    for record in records.order("name")
+      content << "#{i}. " + record.name.titleize + "<br/>"
       i += 1
     end
     content.html_safe

@@ -1,0 +1,3 @@
+$("#status_<%=@block.id%>").html("<%=escape_javascript(link_to @block.status? ? image_tag('tick.gif') : image_tag('cross.gif'),approve_block_path,:remote=>true)%>");
+
+

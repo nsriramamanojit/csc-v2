@@ -3,6 +3,8 @@ class Division < ActiveRecord::Base
   #relations
   belongs_to :state
   has_many :districts, :dependent => :destroy
+  has_many :blocks,:dependent => :destroy
+  has_many :panchayats,:dependent => :destroy
 
   #validations
   validates :state_id, :presence => true

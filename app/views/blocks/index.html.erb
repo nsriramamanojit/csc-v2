@@ -1,0 +1,74 @@
+<% title "CSC | Blocks" %>
+<h3>CSC | Blocks | Manage Blocks</h3>
+<% content_for :left_panel do %>
+    <td valign="top" width="250"> <%= render 'common/search' %>
+      <%= render 'recent' %> </td>
+<% end %>
+<div class="help_text">
+  Area for managing Blocks. <br/>
+  Along with creating, managing Blocks for Application.
+</div>
+<div class="link_buttons">
+  <%= link_to content_tag(:span, 'New Block'), new_block_path, :class => 'btn-blue' %>
+  <%= link_to content_tag(:span, 'Export'), "#", :class => 'btn-yellow' %>
+  <%= link_to content_tag(:span, 'Home'), "#", :class => 'btn-yellow' %>
+</div>
+<% if @blocks.blank? %>
+    <div class="error_msg">
+      OOPS!.. No Blocks are Found in the System..!
+    </div>
+<% else %>
+    <table width="100%">
+      <tr>
+        <td align="right">
+          <b><i>per page</i></b>
+          <%= per_page %>| <%= page_entries_info @blocks %>
+        </td>
+      </tr>
+    </table>
+    <table class="tablesorter">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Status?</th>
+        <th>Name</th>
+        <th>Reference Name</th>
+        <th>State</th>
+        <th>Division</th>
+        <th>District</th>
+        <th>Panchayats</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% i=1 %>
+      <% @blocks.each do |block| %>
+          <tr>
+            <td><%= i %></td>
+            <td>
+              <div id="status_<%= block.id %>">
+                <%= link_to block.status? ? image_tag('tick.gif') : image_tag('cross.gif'), approve_block_path(block), :remote => true %>
+              </div>
+            </td>
+            <td><%= highlight(block.name.titleize, params[:search]) %></td>
+            <td><%= block.short_code %></td>
+            <td><%= highlight(block.state.name.titleize, params[:search]) %></td>
+            <td><%= highlight(block.division.name.titleize, params[:search]) %></td>
+            <td><%= highlight(block.district.name.titleize, params[:search]) %></td>
+            <td><%= link_to block.panchayats.size, panchayats_path, :class => 'tipTipRight', :title => associated_names(block.panchayats) %></td>
+            <td>
+              <%= link_for_show_pop(block) %>
+            </td>
+          </tr>
+          <% i = i + 1 %>
+      <% end %>
+      </tbody>
+    </table>
+    <div class="flickr_pagination">
+      <%= page_entries_info @blocks %> <%= will_paginate @blocks, :container => false %>
+    </div>
+<% end %>
+
+
+
+

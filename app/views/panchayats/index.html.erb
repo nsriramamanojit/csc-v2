@@ -1,0 +1,72 @@
+<% title "CSC | Panchayats" %>
+<h3>CSC | Panchayats | Manage Panchayats</h3>
+<% content_for :left_panel do %>
+    <td valign="top" width="250"> <%= render 'common/search' %>
+      <%= render 'recent' %> </td>
+<% end %>
+<div class="help_text">
+  Area for managing Panchayats. <br/>
+  Along with creating, managing Panchayats for Application.
+</div>
+<div class="link_buttons">
+  <%= link_to content_tag(:span, 'New Panchayat'), new_panchayat_path, :class => 'btn-blue' %>
+  <%= link_to content_tag(:span, 'Export'), "#", :class => 'btn-yellow' %>
+  <%= link_to content_tag(:span, 'Home'), "#", :class => 'btn-yellow' %>
+</div>
+<% if @panchayats.blank? %>
+    <div class="error_msg">
+      OOPS!.. No Panchayats are Found in the System..!
+    </div>
+<% else %>
+    <table width="100%">
+      <tr>
+        <td align="right">
+          <b><i>per page</i></b>
+          <%= per_page %>| <%= page_entries_info @panchayats %>
+        </td>
+      </tr>
+    </table>
+    <table class="tablesorter">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Status?</th>
+        <th>Name</th>
+        <th>State</th>
+        <th>Division</th>
+        <th>District</th>
+        <th>Block</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% i=1 %>
+      <% @panchayats.each do |panchayat| %>
+          <tr>
+            <td><%= i %></td>
+            <td>
+              <div id="status_<%= panchayat.id %>">
+                <%= link_to panchayat.status? ? image_tag('tick.gif') : image_tag('cross.gif'), approve_panchayat_path(panchayat), :remote => true %>
+              </div>
+            </td>
+            <td><%= highlight(panchayat.name.titleize, params[:search]) %></td>
+            <td><%= highlight(panchayat.state.name.titleize, params[:search]) %></td>
+            <td><%= highlight(panchayat.division.name.titleize, params[:search]) %></td>
+            <td><%= highlight(panchayat.district.name.titleize, params[:search]) %></td>
+            <td><%= highlight(panchayat.block.name.titleize, params[:search]) %></td>
+            <td>
+              <%= link_for_show_pop(panchayat) %>
+            </td>
+          </tr>
+          <% i = i + 1 %>
+      <% end %>
+      </tbody>
+    </table>
+    <div class="flickr_pagination">
+      <%= page_entries_info @panchayats %> <%= will_paginate @panchayats, :container => false %>
+    </div>
+<% end %>
+
+
+
+

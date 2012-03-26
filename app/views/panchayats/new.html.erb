@@ -1,0 +1,11 @@
+<% title "CSC | Panchayats " %>
+<% content_for :sub_heading do %>
+    <%= sub_heading('CSC | Panchayats','Create Panchayat') %>
+<% end %>
+<div class="help_text_caution">
+  FURTHER MODIFICATION WILL NOT POSSIBLE AFTER SUBMITTING THE FORM.
+</div>
+<%= render 'form',:heading => 'Create New Panchayat' %>
+<div class="link_buttons">
+  <%=link_to_all(panchayats_path)%>
+</div>

@@ -2,6 +2,9 @@ class State < ActiveRecord::Base
   #relations
   has_many :divisions, :dependent => :destroy
   has_many :districts, :dependent => :destroy
+  has_many :blocks,:dependent => :destroy
+  has_many :panchayats,:dependent => :destroy
+
 
   #validations
   validates :name, :presence => true, :uniqueness => true, :length => {:maximum => 100}

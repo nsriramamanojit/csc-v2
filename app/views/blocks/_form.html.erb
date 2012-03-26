@@ -1,0 +1,17 @@
+<div class="form-container">
+  <p class="legend">
+    <strong>Note:</strong>
+    Required fields are marked with an asterisk (<em>*</em>)
+  </p>
+  <%= simple_form_for(@block, :validate => true) do |f| %>
+      <fieldset>
+        <%= f.association :state, :collection => State.active, :prompt => "Select State "%>
+        <%= f.association :division, :collection => Division.active, :prompt => "Select Division "%>
+        <%= f.association :district, :collection => District.active, :prompt => "Select District "%>
+        <%= f.input :name,:placeholder=>"Enter Block Name" %>
+        <%= f.input :description,:label=>"Description" %>
+        <%= f.input :short_code, :label => 'Reference Name' %>
+        <%= f.submit 'Save', :disable_with=>'Please wait...' %>
+      </fieldset>
+  <% end %>
+</div>

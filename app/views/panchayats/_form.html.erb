@@ -1,0 +1,17 @@
+<div class="form-container">
+  <p class="legend">
+    <strong>Note:</strong>
+    Required fields are marked with an asterisk (<em>*</em>)
+  </p>
+  <%= simple_form_for(@panchayat, :validate => true) do |f| %>
+      <fieldset>
+        <%= f.association :state, :collection => State.active, :prompt => "Select State "%>
+        <%= f.association :division, :collection => Division.active, :prompt => "Select Division "%>
+        <%= f.association :district, :collection => District.active, :prompt => "Select District "%>
+        <%= f.association :block, :collection => District.active, :prompt => "Select Block "%>
+        <%= f.input :name,:placeholder=>"Enter Panchayat Name" %>
+        <%= f.input :description,:label=>"Description" %>
+        <%= f.submit 'Save', :disable_with=>'Please wait...' %>
+      </fieldset>
+  <% end %>
+</div>

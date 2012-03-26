@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 3) do
+ActiveRecord::Schema.define(:version => 5) do
+
+  create_table "blocks", :force => true do |t|
+    t.integer  "state_id"
+    t.integer  "division_id"
+    t.integer  "district_id"
+    t.string   "name"
+    t.string   "description"
+    t.string   "short_code"
+    t.boolean  "status",      :default => false
+    t.integer  "created_by"
+    t.integer  "updated_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "districts", :force => true do |t|
     t.integer  "state_id"
@@ -35,6 +49,20 @@ ActiveRecord::Schema.define(:version => 3) do
     t.boolean  "status",      :default => false
     t.integer  "created_by"
     t.integer  "updated_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "panchayats", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "state_id"
+    t.integer  "division_id"
+    t.integer  "district_id"
+    t.integer  "block_id"
+    t.boolean  "status",      :default => true
+    t.integer  "created_by"
+    t.integer  "modified_by"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

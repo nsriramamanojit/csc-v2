@@ -1,5 +1,13 @@
 CscV2::Application.routes.draw do
 
+  resources :panchayats do
+    get :approve, :on=>:member
+  end
+
+  resources :blocks do
+    get :approve, :on=>:member
+  end
+
   resources :districts do
     get :approve, :on=>:member
   end
