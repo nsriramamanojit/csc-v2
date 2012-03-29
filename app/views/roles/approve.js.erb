@@ -1,0 +1,3 @@
+$("#status_<%=@role.id%>").html("<%=escape_javascript(link_to @role.status? ? image_tag('tick.gif') : image_tag('cross.gif'),approve_role_path,:remote=>true)%>");
+
+

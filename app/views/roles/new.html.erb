@@ -1,0 +1,11 @@
+<% title "CSC | Roles " %>
+<% content_for :sub_heading do %>
+    <%= sub_heading('CSC | Roles','Create Role') %>
+<% end %>
+<div class="help_text_caution">
+  FURTHER MODIFICATION WILL NOT POSSIBLE AFTER SUBMITTING THE FORM.
+</div>
+<%= render 'form',:heading => 'Create New Role' %>
+<div class="link_buttons">
+  <%=link_to_all(roles_path)%>
+</div>

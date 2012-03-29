@@ -1,0 +1,99 @@
+<% title "CSC | VLE" %>
+<h3>CSC | VLE | VLE Registrations</h3>
+
+<% content_for :left_panel do %>
+    <td valign="top" width="250"> <%= render 'common/search' %>
+      <%= render 'recent' %> </td>
+<% end %>
+<div class="help_text">
+  Area for managing Users. <br/>
+  Along with creating, managing Users for Application.
+</div>
+<div class="link_buttons">
+  <%= link_to content_tag(:span, 'New User'), new_user_path, :class => 'btn-blue' %>
+  <%= link_to content_tag(:span, 'Export'), "#", :class => 'btn-yellow' %>
+  <%= link_to content_tag(:span, 'Home'), "#", :class => 'btn-yellow' %>
+
+</div>
+
+<% if @users.blank? %>
+    <div class="error_msg">
+      OOPS!.. No Users are Found in the System..!
+    </div>
+<% else %>
+    <table width="100%">
+      <tr>
+        <td align="right">
+          <b><i>per page</i></b>
+          <%= per_page %>| <%= page_entries_info @users %>
+        </td>
+      </tr>
+    </table>
+
+    <table class="tablesorter">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Verified?</th>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Division</th>
+        <th>District</th>
+        <th>Block</th>
+        <th>Panchayat</th>
+        <th>Mobile</th>
+        <th>VLE ID</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% i=1 %>
+      <% @users.each do |user| %>
+          <tr>
+            <td><%= i %></td>
+            <td>
+              <div id="status_<%= user.id %>">
+                <%= link_to user.status? ? image_tag('tick.gif') : image_tag('cross.gif'), approve_user_path(user), :remote => true %>
+              </div>
+            </td>
+            <td><%= user.email %></td>
+            <td><%= highlight(user.name.titleize, params[:search]) %></td>
+            <td>
+              <%= user.user_profile.blank? ? 'N.A' : (user.user_profile.division_id? ? user.user_profile.division.name.titleize : 'N.A') %>
+            </td>
+            <td>
+              <%= user.user_profile.blank? ? 'N.A' : (user.user_profile.district_id? ? user.user_profile.district.name.titleize : 'N.A') %>
+            </td>
+            <td>
+              <%= user.user_profile.blank? ? 'N.A' : (user.user_profile.block_id? ? user.user_profile.block.name.titleize : 'N.A') %>
+            </td>
+            <td>
+              <%= user.user_profile.blank? ? 'N.A' : (user.user_profile.panchayat_id? ? user.user_profile.panchayat.name.titleize : 'N.A') %>
+            </td>
+            <td><%= user.mobile_number %></td>
+            <td>
+              <%= user.user_profile.blank? ? 'N.A' : (user.user_profile.vle_code? ? user.user_profile.vle_code : 'N.A') %>
+            </td>
+
+            <td><%=  get_role(user) %></td>
+            <td>
+              <%= link_to "View", user, :class => 'usuallink bold_text',:rel => "facebox" %>
+
+            </td>
+          </tr>
+          <% i = i + 1 %>
+      <% end %>
+      </tbody>
+    </table>
+    <div class="flickr_pagination">
+      <%= page_entries_info @users %> <%= will_paginate @users, :container => false %>
+    </div>
+<% end %>
+
+
+
+
+
+
+

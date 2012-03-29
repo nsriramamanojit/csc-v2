@@ -1,0 +1,97 @@
+<div class="form-container">
+  <p class="legend">
+    <strong>Note:</strong>
+    Required fields are marked with an asterisk (<em>*</em>)
+  </p>
+  <%= simple_form_for(@user, :validate => true) do |f| %>
+      <fieldset>
+        <%= f.input :name, :label => "Full Name", :placeholder => "Full Name" %>
+        <%= f.input :father_name, :label => "Father Name", :placeholder => "Father Name/Husband Name" %>
+        <%= f.input :gender, :collection => [:Male, :Female], :prompt => "Select Gender" %>
+        <%= f.input :dob, :as => :string, :input_html => {:id => 'date_picker'}, :label => 'Date of Birth', :placeholder => "Entert Date of Birth" %>
+        <%= f.input :address1, :label => "H.No", :placeholder => "House Number" %>
+        <%= f.input :address2, :label => "Street/Area", :placeholder => "Street Name/Area" %>
+        <%= f.input :place, :label => "Village/Town Name", :placeholder => "Village / Town Name" %>
+        <%= f.input :pin, :label => "PIN", :placeholder => "PIN code Must be 6 Digits" %>
+        <%= f.input :mobile_number, :label => "Mobile", :placeholder => "Mobile Number Must be 10 Digits. Ex:9885976490" %>
+        <%= f.input :phone_number, :label => "Land/Alternative Phone", :placeholder => "Phone Number" %>
+        <%= f.association :roles, :label_method => lambda { |role| "#{role.name.titleize} " } %>
+        <%= f.simple_fields_for(:user_profile) do |up| %>
+            <%= up.association :state, :collection => State.active.all(:order => 'name'), :prompt => "Choose a State", :label_method => lambda { |state| "#{state.name.titleize} " },:label=>"Select State" %>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#division').hide();
+
+                    $('#user_user_profile_attributes_state_id').change(function () {
+                        var data = $('#user_user_profile_attributes_state_id').val();
+                        $.ajax({
+                            type:"POST",
+                            url:"load_divisions/" + data,
+                            data:data
+                        });
+                     });
+                });
+            </script>
+            <div id="division">
+              <%= up.association :division, :collection => Division.active.all(:order => 'name'), :prompt => "Choose a Division", :label_method => lambda { |division| "#{division.name.titleize} " },:label=>"Select Division" %>
+              <script type="text/javascript">
+                  $(document).ready(function () {
+                      $('#district').hide();
+
+                      $('#user_user_profile_attributes_division_id').change(function () {
+                          var data = $('#user_user_profile_attributes_division_id').val();
+                          $.ajax({
+                              type:"POST",
+                              url:"load_districts/" + data,
+                              data:data
+                          });
+                       });
+                  });
+               </script>
+             </div>
+            <div id="district">
+              <%= up.association :district, :collection => District.active.all(:order => 'name'), :prompt => "Choose a District", :label_method => lambda { |district| "#{district.name.titleize} " },:label=>"Select District" %>
+              <script type="text/javascript">
+                  $(document).ready(function () {
+                      $('#block').hide();
+
+                      $('#user_user_profile_attributes_district_id').change(function () {
+                          var data = $('#user_user_profile_attributes_district_id').val();
+                          $.ajax({
+                              type:"POST",
+                              url:"load_blocks/" + data,
+                              data:data
+                          });
+                       });
+                  });
+               </script>
+             </div>
+            <div id="block">
+              <%= up.association :block, :collection => Block.active.all(:order => 'name'), :prompt => "Choose a Block", :label_method => lambda { |block| "#{block.name.titleize} " },:label=>"Select Block" %>
+              <script type="text/javascript">
+                  $(document).ready(function () {
+                      $('#panchayat').hide();
+                       $('#user_user_profile_attributes_block_id').change(function () {
+                          var data = $('#user_user_profile_attributes_block_id').val();
+                          $.ajax({
+                              type:"POST",
+                              url:"load_panchayats/" + data,
+                              data:data
+                          });
+                       });
+                  });
+               </script>
+             </div>
+            <div id="panchayat">
+              <%= up.association :panchayat, :collection => Panchayat.active.all(:order => 'name'), :prompt => "Choose a Panchayat", :label_method => lambda { |pan| "#{pan.name.titleize} " },:label=>"Select Panchayat" %>
+             </div>
+        <% end %>
+         <%= f.submit 'Save', :disable_with => 'Please wait...' %>
+      </fieldset>
+  <% end %>
+</div>
+<script>
+    $(function () {
+        $("#date_picker").datepicker({dateFormat:'dd-mm-yy', changeMonth:true, changeYear:true, yearRange:'1900:c-18' });
+    });
+</script>

@@ -1,7 +1,7 @@
 body {
 	margin: 0;
 	padding: 0;
-	background-color: #f2f2f2;
+	background-color: #ffffff;
 	font-family: Tahoma,verdana,helvetica,sans-serif;
 	font-size: 12px;
 	color: #292929;
@@ -13,7 +13,7 @@ body {
 }
 
 .standalone {
-    background: #f5f5f5;
+    background: #ffffff;
     border: 5px #b0c4de solid;
     margin: 75px auto 6px auto;
     padding: 20px;
@@ -48,7 +48,7 @@ body {
     margin: 8px 0px 0px 0px;
 }
 .section {
-    background: #f5f5f5;
+    background: #ffffff;
     color: #3f3f3f;
     margin: 0px 0px 2px 0px;
     padding: 4px 15px 8px 15px;

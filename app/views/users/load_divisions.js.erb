@@ -1,0 +1,6 @@
+$('#division').show();
+$('#user_user_profile_attributes_division_id').empty();
+$('#user_user_profile_attributes_division_id').append($("<option></option>").attr("value","").text('Select Division'));
+<% for division in @load_divisions %>
+$('#user_user_profile_attributes_division_id').append($("<option></option>").attr("value", '<%= division.id %>').text('<%= division.name.titleize %>'));
+<% end %>

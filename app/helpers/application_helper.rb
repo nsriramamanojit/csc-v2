@@ -73,7 +73,7 @@ module ApplicationHelper
     roles = Role.where(:id=>user.roles)
     content = ""
     for role in roles
-      content << role.name.titleize
+      content << '<font color="#dc143c"><b>'+ role.name.upcase+'</b></font> '
       content <<  "<br/>"
     end
     content.html_safe
