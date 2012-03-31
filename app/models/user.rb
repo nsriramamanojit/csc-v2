@@ -42,5 +42,11 @@ class User < ActiveRecord::Base
         scoped
       end
     end
+    def admin_users
+      joins([:roles]).where(:roles => {:name => %w(vle district_manager district_engineer dlf_agent)})
+    end
+    def super_users
+      joins([:roles]).where(:roles => {:name => %w(super admin manager)})
+    end
   end
 end

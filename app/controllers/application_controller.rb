@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
   before_filter { |c| Authorization.current_user = c.current_user }
   before_filter :set_locale
+
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
   end
@@ -39,7 +40,7 @@ class ApplicationController < ActionController::Base
       return true
     elsif current_user and !current_user.status?
       store_location
-      flash[:warning] = "Your account not yet approved."
+      flash[:alert] = "Your account not yet approved."
       redirect_to new_user_session_url
       return false
     else
@@ -73,7 +74,7 @@ class ApplicationController < ActionController::Base
   def permission_denied
     flash[:error] = "Sorry, You have NO Permission to access the Content."
     redirect_to :back
-  rescue ActionController::RedirectBackError
+    rescue ActionController::RedirectBackError
     redirect_to homes_path
   end
 

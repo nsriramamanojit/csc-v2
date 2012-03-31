@@ -1,4 +1,4 @@
-/*START SImple form css */
+/*START Simple form css */
 .simple_form label {
     float: left;
     width: 250px;
@@ -388,38 +388,6 @@ h4, h5 a:hover, h4, h5 a:focus, h4, h5 a:active {
     margin: auto;
     width: 480px;
 }
-
-#nys_1,#nys_2,#nys_3,#nys_4,#nys_5,#nys_6,#nys_7,#nys_8{
-    color: #ee82ee;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-#going_1,#going_2,#going_3,#going_4,#going_5,#going_6,#going_7,#going_8{
-    color: #ffa500;
-    font-size: 13px;
-    font-weight: bold;
-
-}
-#complete_1,#complete_2,#complete_3,#complete_4,#complete_5,#complete_6,#complete_7,#complete_8{
-    color: #008000;
-    font-size: 13px;
-    font-weight: bold;
-
-}
-#pending_1,#pending_2,#pending_3,#pending_4,#pending_5,#pending_6,#pending_7,#pending_8{
-    color: #ff0000;
-    font-size: 13px;
-    font-weight: bold;
-
-}
-#no_data_1,#no_data_2,#no_data_3,#no_data_4,#no_data_5,#no_data_6,#no_data_7,#no_data_8{
-    color: #0000ff;
-    font-size: 13px;
-    font-weight: bold;
-
-}
-
 
 /**********************************
 

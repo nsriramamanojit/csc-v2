@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 9) do
+ActiveRecord::Schema.define(:version => 10) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(:version => 9) do
     t.integer  "state_id"
     t.integer  "division_id"
     t.string   "name"
-    t.text     "description"
-    t.text     "short_code"
+    t.string   "description"
+    t.string   "short_code"
     t.integer  "dis_number",  :default => 0
     t.boolean  "status",      :default => false
     t.integer  "created_by"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(:version => 9) do
   create_table "divisions", :force => true do |t|
     t.integer  "state_id"
     t.string   "name"
-    t.text     "description"
+    t.string   "description"
     t.string   "short_code"
     t.boolean  "status",      :default => false
     t.integer  "created_by"
@@ -144,6 +144,11 @@ ActiveRecord::Schema.define(:version => 9) do
     t.datetime "agreement8_updated_at"
     t.integer  "created_by"
     t.integer  "updated_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_sessions", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end

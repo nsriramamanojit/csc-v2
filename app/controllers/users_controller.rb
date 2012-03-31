@@ -1,9 +1,12 @@
 class UsersController < ApplicationController
   layout "application", :except => [:show, :edit]
   before_filter :require_user, :recent_items
+  filter_access_to :all
+
 
   def index
-    @users = User.search(params[:search]).paginate(:page => page, :per_page => per_page)
+    @users = User.admin_users.search(params[:search]).paginate(:page => page, :per_page => per_page) if has_role?(:admin)
+    @users = User.super_users.search(params[:search]).paginate(:page => page, :per_page => per_page) if has_role?(:super)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -22,7 +25,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @user.build_user_profile
+    @user.build_user_profile if has_role?(:admin)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -112,11 +115,48 @@ class UsersController < ApplicationController
     end
 
   end
+  def profile
+    @user = User.find(params[:id])
+  end
+  def profile_edit
+    @user = current_user
+  end
+  def profile_update
+    @user = current_user
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        format.html { redirect_to(profile_user_path(current_user), :notice => 'Profile Updated Successfully.') }
+        format.xml { head :ok }
+      else
+        format.html { render :action => "profile_update" }
+        format.xml { render :xml => @user.errors, :status => :unprocessable_entity }
+      end
+    end
+
+  end
+  def change_password
+
+  end
+  def password_change
+    @user = current_user
+    return flash.now[:error] = "Current password is Wrong/Blank" unless @user.valid_password? params[:old_password]
+    if params[:password] == params[:password_confirmation] && !params[:password_confirmation].blank?
+      @user.password = params[:password]
+      if @user.save
+        flash.now[:notice] = "Password Changed Successfully."
+      else
+        flash.now[:error]= "Password not changed"
+      end
+    else
+      flash.now[:error] = "New Password mismatch"
+      @old_password = params[:old_password]
+    end
+
+  end
   ###################################################
   private
   def recent_items
     @recent = User.recent
   end
-
 
 end

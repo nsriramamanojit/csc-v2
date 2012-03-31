@@ -38,4 +38,10 @@ $(document).ready(function() {
 });
 
 
+// ajax cluetip
+$(document).ready(function() {
+    $('a.ajax-cluetip').cluetip({width: '400px;', showTitle: false, arrows: true});
+});
+
+
 

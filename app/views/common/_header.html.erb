@@ -4,11 +4,11 @@
     <div id="top_m">
       <ul class="top_menu">
         <li>Welcome-
-          <%# current_user.name %>
+          <%= current_user.name %>
         </li>
         <li><%= link_to 'Home', "#" %></li>
-        <li><%= link_to 'Profile', "#" %></li>
-        <li><%= link_to "Sign out", "#" %></li>
+        <li><%= link_to 'Profile', profile_user_path(current_user.id) %></li>
+        <li><%= link_to "Sign out", logout_path %></li>
       </ul>
     </div>
   </div>

@@ -18,7 +18,9 @@ module ApplicationHelper
   def link_for_destroy(path)
     link_to image_tag('/images/icons/delete.png'), path, :confirm => 'Are you sure?', :method => :delete, :title => 'Delete', :class => 'tipTip'
   end
-
+  def link_to_avatar(user)
+    link_to image_tag('avatar.gif'), '#' ,:border=>0
+  end
   def tab_heading(heading)
     content = ""
     content << "<a href='#'>"

@@ -27,6 +27,8 @@ body {
     font-size: 16px;
     padding: 2px;
     width: 355px;
+    color: #0000ff;
+
 }
 
 .standalone input[type =
@@ -53,36 +55,64 @@ body {
     margin: 0px 0px 2px 0px;
     padding: 4px 15px 8px 15px;
 }
-.flash_error, .flash_notice, .flash_success,.flash_warning {
-	padding:10px 10px;margin-bottom:1em;margin-top:1em;border:1px solid #cccccc;
-    font-size:12px;
-    padding-left:30px;
+/*START      FLASH AND ERROR MESSAGES */
+#flash_notice, #flash_error, #flash_alert {
+    padding: 5px 8px;
+    margin: 10px 0;
     border-radius: 5px 5px 5px 5px;
-	}
-.flash_error {
-	background:url("/images/flash/form-ic-error.png") no-repeat scroll 5px 10px #fad0d0;
-   border-color: #f6abab;
-/*    color: #b01717; */
-	}
-.flash_notice {
-	background:url("/images/flash/form-ic-info.png") no-repeat scroll 5px 10px #D1ECF7;
-    border-color: #00ccff;
-/*    color:#11689E;   */
-	}
-.flash_success {
-	background:url("/images/flash/form-ic-success.png") no-repeat scroll 5px 10px #e5f8ce;
-    border-color: #006600;
-/*    color: #62b548;     */
- }
- .flash_warning{
- 	background:url("/images/flash/form-ic-warning.png") no-repeat scroll 5px 10px #fff6bf;
-    border-color: #fceb77;
-/*    color: #957210;   */
- }
-.flash_error a {color: #11689e;}
-.flash_notice a {color: #11689e;}
-.flash_success a {color: #11689e;}
-.flash_warning a {color: #11689e;}
+
+}
+
+#flash_notice {
+    background-color: #CFC;
+    border: solid 1px #6C6;
+}
+
+#flash_error, #flash_alert {
+    background-color: #FCC;
+    border: solid 1px #C66;
+}
+
+.fieldWithErrors {
+    display: inline;
+}
+
+.error_messages {
+    width: 400px;
+    border: 2px solid #CF0000;
+    padding: 0px;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+    font-size: 12px;
+}
+
+.error_messages h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 10px;
+    font-size: 12px;
+    margin: 0;
+    background-color: #c00;
+    color: #fff;
+}
+
+.error_messages p {
+    margin: 8px 10px;
+}
+
+.error_messages ul {
+    margin: 0;
+}
+
+span.error {
+    color: #D00;
+    padding-left: 5px;
+    font-size: 12px;
+}
+
+/*END FLASH AND ERROR MESSAGES */
+
 
 
 

@@ -1,5 +1,5 @@
 <% title "CSC | VLE" %>
-<h3>CSC | VLE | VLE Registrations</h3>
+<h3>CSC | VLE | List of VLE's</h3>
 
 <% content_for :left_panel do %>
     <td valign="top" width="250"> <%= render 'common/search' %>
@@ -35,14 +35,14 @@
       <tr>
         <th>#</th>
         <th>Verified?</th>
-        <th>Email</th>
+        <th>Balance</th>
+        <th>VLE ID</th>
         <th>Name</th>
         <th>Division</th>
         <th>District</th>
         <th>Block</th>
         <th>Panchayat</th>
         <th>Mobile</th>
-        <th>VLE ID</th>
         <th>Role</th>
         <th>Actions</th>
       </tr>
@@ -57,8 +57,10 @@
                 <%= link_to user.status? ? image_tag('tick.gif') : image_tag('cross.gif'), approve_user_path(user), :remote => true %>
               </div>
             </td>
-            <td><%= user.email %></td>
-            <td><%= highlight(user.name.titleize, params[:search]) %></td>
+            <td></td>
+            <td><%= user.user_profile.blank? ? 'N.A' : (user.user_profile.vle_code? ? user.user_profile.vle_code : 'N.A') %>
+            </td>
+            <td><%= link_to highlight(user.name.titleize, params[:search]), "#", :rel => user_info_path(:id => user.id), :class => 'ajax-cluetip' %></td>
             <td>
               <%= user.user_profile.blank? ? 'N.A' : (user.user_profile.division_id? ? user.user_profile.division.name.titleize : 'N.A') %>
             </td>
@@ -72,15 +74,8 @@
               <%= user.user_profile.blank? ? 'N.A' : (user.user_profile.panchayat_id? ? user.user_profile.panchayat.name.titleize : 'N.A') %>
             </td>
             <td><%= user.mobile_number %></td>
-            <td>
-              <%= user.user_profile.blank? ? 'N.A' : (user.user_profile.vle_code? ? user.user_profile.vle_code : 'N.A') %>
-            </td>
-
-            <td><%=  get_role(user) %></td>
-            <td>
-              <%= link_to "View", user, :class => 'usuallink bold_text',:rel => "facebox" %>
-
-            </td>
+            <td><%= get_role(user) %></td>
+            <td><%= link_to "View", user, :class => 'usuallink bold_text', :rel => "facebox" %></td>
           </tr>
           <% i = i + 1 %>
       <% end %>
